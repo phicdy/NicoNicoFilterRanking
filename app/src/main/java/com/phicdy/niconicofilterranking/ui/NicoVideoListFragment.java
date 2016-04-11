@@ -3,6 +3,8 @@ package com.phicdy.niconicofilterranking.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +17,15 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.phicdy.niconicofilterranking.R;
+import com.phicdy.niconicofilterranking.rss.RssParser;
 import com.phicdy.niconicofilterranking.video.NicoVideo;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -65,8 +74,41 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
         if (getArguments() != null) {
         }
 
-        mAdapter = new ArrayAdapter<NicoVideo>(getActivity(),
-                R.layout.item_nicovideo_list, android.R.id.text1, new ArrayList<NicoVideo>());
+        final String videoKey = "videoKey";
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                Bundle data = msg.getData();
+                ArrayList<NicoVideo> videos = data.getParcelableArrayList(videoKey);
+                mAdapter = new NicoVideoListAdapter(videos, getContext());
+                mListView.setAdapter(mAdapter);
+            }
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                final URL url;
+                try {
+                    url = new URL("http://www.nicochart.jp/ranking/feed/");
+                    if (!"http".equalsIgnoreCase(url.getProtocol())
+                            && !"https".equalsIgnoreCase(url.getProtocol())) {
+                        return;
+                    }
+                    Document document = Jsoup.connect(url.toString()).get();
+                    RssParser parser = new RssParser();
+                    ArrayList<NicoVideo> videos = parser.parseNicoChartFeed(document);
+                    Message msg = handler.obtainMessage();
+                    Bundle data = new Bundle();
+                    data.putParcelableArrayList(videoKey, videos);
+                    msg.setData(data);
+                    handler.sendMessage(msg);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     @Override

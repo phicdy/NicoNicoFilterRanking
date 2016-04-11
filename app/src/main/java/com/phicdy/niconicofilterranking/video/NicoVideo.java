@@ -1,6 +1,9 @@
 package com.phicdy.niconicofilterranking.video;
 
-public class NicoVideo {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class NicoVideo implements Parcelable {
 
     private String title;
     private String url;
@@ -74,5 +77,21 @@ public class NicoVideo {
 
     public void setThumbnailPath(String thumbnailPath) {
         this.thumbnailPath = thumbnailPath;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(url);
+        dest.writeString(playCount);
+        dest.writeString(commentCount);
+        dest.writeString(myListCount);
+        dest.writeString(publishedDate);
+        dest.writeString(thumbnailPath);
     }
 }
