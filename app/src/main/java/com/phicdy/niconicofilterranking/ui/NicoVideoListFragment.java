@@ -208,11 +208,23 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
             NicoVideo nicoVideo = this.getItem(position);
 
             holder.tvTitle.setText(nicoVideo.getTitle());
-            holder.tvInfo.setText(nicoVideo.getPlayCount());
+            holder.tvInfo.setText(generateNicoVideoInfo(nicoVideo));
             holder.tvPublishedDate.setText(nicoVideo.getPublishedDate());
             Picasso.with(getContext()).load(nicoVideo.getThumbnailPath()).into(holder.ivThumbnail);
 
             return row;
+        }
+
+        private String generateNicoVideoInfo(NicoVideo video) {
+            String playCountDesc = getString(R.string.play_count_desc);
+            String commentCountDesc = getString(R.string.comment_count_desc);
+            String myListCountDesc = getString(R.string.mylist_count_desc);
+            String playCount = video.getPlayCount();
+            String commentCount = video.getCommentCount();
+            String myListCount = video.getMyListCount();
+            return playCountDesc + playCount + " " +
+                    commentCountDesc + commentCount + " " +
+                    myListCountDesc + myListCount;
         }
 
         private class ViewHolder {
