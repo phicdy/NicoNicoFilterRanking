@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.phicdy.niconicofilterranking.R;
 import com.phicdy.niconicofilterranking.rss.RssParser;
 import com.phicdy.niconicofilterranking.video.NicoVideo;
+import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -209,7 +210,7 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
             holder.tvTitle.setText(nicoVideo.getTitle());
             holder.tvInfo.setText(nicoVideo.getPlayCount());
             holder.tvPublishedDate.setText(nicoVideo.getPublishedDate());
-//            holder.ivThumbnail.setImageBitmap();
+            Picasso.with(getContext()).load(nicoVideo.getThumbnailPath()).into(holder.ivThumbnail);
 
             return row;
         }
