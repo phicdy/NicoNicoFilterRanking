@@ -82,6 +82,7 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
                 ArrayList<NicoVideo> videos = data.getParcelableArrayList(videoKey);
                 mAdapter = new NicoVideoListAdapter(videos, getContext());
                 mListView.setAdapter(mAdapter);
+                mListener.OnNicoChartLoadFinished();
             }
         };
         new Thread() {
@@ -149,7 +150,6 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
             NicoVideo selectedVideo = (NicoVideo)mAdapter.getItem(position);
-            mListener.onFragmentInteraction(selectedVideo.getUrl());
         }
     }
 
@@ -177,7 +177,7 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(String url);
+        public void OnNicoChartLoadFinished();
     }
 
     class NicoVideoListAdapter extends ArrayAdapter<NicoVideo> {

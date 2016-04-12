@@ -5,16 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.phicdy.niconicofilterranking.R;
-import com.phicdy.niconicofilterranking.rss.RssParser;
-import com.phicdy.niconicofilterranking.video.NicoVideo;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
+import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
 public class RankingActivity extends AppCompatActivity implements NicoVideoListFragment.OnFragmentInteractionListener {
 
@@ -33,7 +25,8 @@ public class RankingActivity extends AppCompatActivity implements NicoVideoListF
     }
 
     @Override
-    public void onFragmentInteraction(String url) {
-
+    public void OnNicoChartLoadFinished() {
+        CircularProgressBar progressBar = (CircularProgressBar)findViewById(R.id.circleProgress);
+        progressBar.progressiveStop();
     }
 }
