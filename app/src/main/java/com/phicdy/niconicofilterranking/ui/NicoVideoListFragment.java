@@ -1,6 +1,8 @@
 package com.phicdy.niconicofilterranking.ui;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -118,6 +120,9 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
             NicoVideo selectedVideo = (NicoVideo)mAdapter.getItem(position);
+            Uri uri = Uri.parse(selectedVideo.getUrl());
+            Intent i = new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(i);
         }
     }
 
