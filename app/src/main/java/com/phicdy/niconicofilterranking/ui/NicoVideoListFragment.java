@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.WorkerThread;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,28 +57,30 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
         new Thread() {
             @Override
             public void run() {
-                final URL url;
-                try {
-                    url = new URL("http://www.nicochart.jp/ranking/feed/");
-                    if (!"http".equalsIgnoreCase(url.getProtocol())
-                            && !"https".equalsIgnoreCase(url.getProtocol())) {
-                        return;
-                    }
-                    Document document = Jsoup.connect(url.toString()).get();
-                    RssParser parser = new RssParser();
-                    ArrayList<NicoVideo> videos = parser.parseNicoChartFeed(document);
-                    Message msg = handler.obtainMessage();
-                    Bundle data = new Bundle();
-                    data.putParcelableArrayList(videoKey, videos);
-                    msg.setData(data);
-                    handler.sendMessage(msg);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                Document document = getDocumentFromNicoChart();
+                RssParser parser = new RssParser();
+                ArrayList<NicoVideo> videos = parser.parseNicoChartFeed(document);
+                Message msg = handler.obtainMessage();
+                Bundle data = new Bundle();
+                data.putParcelableArrayList(videoKey, videos);
+                msg.setData(data);
+                handler.sendMessage(msg);
             }
         }.start();
+    }
+
+    @WorkerThread
+    private Document getDocumentFromNicoChart() {
+        URL url;
+        try {
+            url = new URL("http://www.nicochart.jp/ranking/feed/");
+            return Jsoup.connect(url.toString()).get();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
