@@ -3,4 +3,5 @@
     <string name="play_count_desc">再生：</string>
     <string name="comment_count_desc">コメント：</string>
     <string name="mylist_count_desc">マイリスト：</string>
+    <string name="network_error">接続に失敗しました。ネットワーク状態を確認してください</string>
 </resources>
