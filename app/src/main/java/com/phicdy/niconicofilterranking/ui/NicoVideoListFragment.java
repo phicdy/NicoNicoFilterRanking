@@ -127,6 +127,7 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
     }
 
     public interface OnFragmentInteractionListener {
+        public void OnNicoChartLoadStart();
         public void OnNicoChartLoadFinished();
     }
 
