@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -44,22 +45,81 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startGetRanking();
+    }
 
-        final String videoKey = "videoKey";
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                Bundle data = msg.getData();
-                ArrayList<NicoVideo> videos = data.getParcelableArrayList(videoKey);
-                mAdapter = new NicoVideoListAdapter(videos, getContext());
-                mListView.setAdapter(mAdapter);
-                mListener.OnNicoChartLoadFinished();
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (OnFragmentInteractionListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_nicovideo, container, false);
+
+        // Set the adapter
+        mListView = (AbsListView) view.findViewById(android.R.id.list);
+        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+
+        // Set OnItemClickListener so we can be notified on item clicks
+        mListView.setOnItemClickListener(this);
+
+        // Set empty view
+        TextView emptyView = (TextView) view.findViewById(android.R.id.empty);
+        mListView.setEmptyView(emptyView);
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    private final String videoKey = "videoKey";
+    private final Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Bundle data = msg.getData();
+            ArrayList<NicoVideo> videos = data.getParcelableArrayList(videoKey);
+            if (videos == null) {
+                videos = new ArrayList<>();
+                setEmptyText(getActivity().getString(R.string.network_error));
             }
-        };
+
+            mAdapter = new NicoVideoListAdapter(videos, getContext());
+            mListView.setAdapter(mAdapter);
+            mListener.OnNicoChartLoadFinished();
+        }
+    };
+
+    private void startGetRanking() {
+        mListener.OnNicoChartLoadStart();
         new Thread() {
             @Override
             public void run() {
                 Document document = getDocumentFromNicoChart();
+                if (document == null) {
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    handler.sendEmptyMessage(0);
+                    return;
+                }
                 RssParser parser = new RssParser();
                 ArrayList<NicoVideo> videos = parser.parseNicoChartFeed(document);
                 Message msg = handler.obtainMessage();
@@ -86,31 +146,6 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_nicovideo, container, false);
-
-        // Set the adapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
-
-        // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
-        return view;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            mListener = (OnFragmentInteractionListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
@@ -123,6 +158,14 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
             Uri uri = Uri.parse(selectedVideo.getUrl());
             Intent i = new Intent(Intent.ACTION_VIEW,uri);
             startActivity(i);
+        }
+    }
+
+    public void setEmptyText(CharSequence emptyText) {
+        View emptyView = mListView.getEmptyView();
+
+        if (emptyView instanceof TextView) {
+            ((TextView) emptyView).setText(emptyText);
         }
     }
 
