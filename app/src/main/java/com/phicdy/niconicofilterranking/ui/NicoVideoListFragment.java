@@ -20,6 +20,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.phicdy.niconicofilterranking.R;
+import com.phicdy.niconicofilterranking.ranking.FeedUrlProvider;
 import com.phicdy.niconicofilterranking.rss.RssParser;
 import com.phicdy.niconicofilterranking.util.DateUtil;
 import com.phicdy.niconicofilterranking.video.NicoVideo;
@@ -30,7 +31,6 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class NicoVideoListFragment extends Fragment implements AbsListView.OnItemClickListener {
@@ -134,10 +134,9 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
 
     @WorkerThread
     private Document getDocumentFromNicoChart() {
-        URL url;
         try {
-            url = new URL("http://www.nicochart.jp/ranking/feed/");
-            return Jsoup.connect(url.toString()).get();
+            String url = FeedUrlProvider.getUrl(FeedUrlProvider.ALL);
+            return Jsoup.connect(url).get();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
