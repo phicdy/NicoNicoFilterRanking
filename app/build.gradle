@@ -45,6 +45,7 @@ dependencies {
     compile 'org.jsoup:jsoup:1.8.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
+    compile 'com.google.code.gson:gson:2.6.2'
     androidTestCompile 'com.android.support.test:runner:0.4.1'
     androidTestCompile 'com.android.support.test:rules:0.4.1'
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
