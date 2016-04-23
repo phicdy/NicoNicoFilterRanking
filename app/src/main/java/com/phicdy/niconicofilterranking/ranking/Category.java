@@ -38,12 +38,14 @@ public class Category {
     public static final int DIALY = 34;
     public static final int OTHER = 35;
 
+    public static final int CATEGORY_SIZE = 35;
+
     /**
      *
      * @return Return the array includes all category indexes
      */
     public static int[] getAllCategories() {
-        int[] indexes = new int[OTHERS];
+        int[] indexes = new int[OTHER];
         for (int i = 0; i < indexes.length; i++) {
             indexes[i] = i;
         }
