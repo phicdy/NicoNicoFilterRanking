@@ -20,6 +20,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.phicdy.niconicofilterranking.R;
+import com.phicdy.niconicofilterranking.ranking.Category;
 import com.phicdy.niconicofilterranking.ranking.FeedUrlProvider;
 import com.phicdy.niconicofilterranking.rss.RssParser;
 import com.phicdy.niconicofilterranking.util.DateUtil;
@@ -135,7 +136,7 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
     @WorkerThread
     private Document getDocumentFromNicoChart() {
         try {
-            String url = FeedUrlProvider.getUrl(FeedUrlProvider.ALL);
+            String url = FeedUrlProvider.getUrl(Category.ALL);
             return Jsoup.connect(url).get();
         } catch (MalformedURLException e) {
             e.printStackTrace();
