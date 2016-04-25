@@ -13,6 +13,11 @@ public class CategorySetting {
         }
     }
 
+    /**
+     *
+     * @param category Category ID defined in Category class
+     * @param enabled If {@code true}, the category becomes available. Else not available.
+     */
     public void setAvailability(int category, boolean enabled) {
         availabilityMap.put(category, enabled);
     }
