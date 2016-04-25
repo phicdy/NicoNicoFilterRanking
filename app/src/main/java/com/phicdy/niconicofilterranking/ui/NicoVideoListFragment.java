@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,19 +19,19 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.phicdy.niconicofilterranking.R;
-import com.phicdy.niconicofilterranking.ranking.Category;
-import com.phicdy.niconicofilterranking.ranking.FeedUrlProvider;
-import com.phicdy.niconicofilterranking.rss.RssParser;
+import com.phicdy.niconicofilterranking.ranking.CategorySetting;
+import com.phicdy.niconicofilterranking.ranking.FeatureData;
+import com.phicdy.niconicofilterranking.ranking.NicoChartRequestChannel;
+import com.phicdy.niconicofilterranking.ranking.RankingFactory;
 import com.phicdy.niconicofilterranking.util.DateUtil;
+import com.phicdy.niconicofilterranking.util.PreferenceHelper;
 import com.phicdy.niconicofilterranking.video.NicoVideo;
 import com.squareup.picasso.Picasso;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class NicoVideoListFragment extends Fragment implements AbsListView.OnItemClickListener {
 
@@ -110,40 +109,35 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
     private void startGetRanking() {
         mListener.OnNicoChartLoadStart();
         new Thread() {
+
             @Override
             public void run() {
-                Document document = getDocumentFromNicoChart();
-                if (document == null) {
+                // Start requests
+                PreferenceHelper helper = PreferenceHelper.getInstance(getContext());
+                CategorySetting setting = helper.getCategorySetting();
+                NicoChartRequestChannel channel = new NicoChartRequestChannel();
+                FeatureData data = channel.startGetMyRanking(setting);
+
+                while (!data.isLoaded()) {
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    handler.sendEmptyMessage(0);
-                    return;
                 }
-                RssParser parser = new RssParser();
-                ArrayList<NicoVideo> videos = parser.parseNicoChartFeed(document);
+
+                // Generate ranking
+                Collection<Document> allDocuments = data.getAllDocuments();
+                ArrayList<NicoVideo> videos = RankingFactory.generateRanking(allDocuments);
+
+                // Send to UI thread
                 Message msg = handler.obtainMessage();
-                Bundle data = new Bundle();
-                data.putParcelableArrayList(videoKey, videos);
-                msg.setData(data);
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList(videoKey, videos);
+                msg.setData(bundle);
                 handler.sendMessage(msg);
             }
         }.start();
-    }
-
-    @WorkerThread
-    private Document getDocumentFromNicoChart() {
-        try {
-            String url = FeedUrlProvider.getUrl(Category.ALL);
-            return Jsoup.connect(url).get();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @Override
