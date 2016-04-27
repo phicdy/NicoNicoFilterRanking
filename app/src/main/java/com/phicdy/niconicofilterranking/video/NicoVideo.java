@@ -12,8 +12,9 @@ public class NicoVideo implements Parcelable {
     private String myListCount;
     private String publishedDate;
     private String thumbnailPath;
+    private String hourTotalPoint;
 
-    public NicoVideo(String title, String url, String playCount, String commentCount, String myListCount, String publishedDate, String thumbnailPath) {
+    public NicoVideo(String title, String url, String playCount, String commentCount, String myListCount, String publishedDate, String thumbnailPath, String hourTotalPoint) {
         this.title = title;
         this.url = url;
         this.playCount = playCount;
@@ -21,7 +22,30 @@ public class NicoVideo implements Parcelable {
         this.myListCount = myListCount;
         this.publishedDate = publishedDate;
         this.thumbnailPath = thumbnailPath;
+        this.hourTotalPoint = hourTotalPoint;
     }
+
+    protected NicoVideo(Parcel in) {
+        title = in.readString();
+        url = in.readString();
+        playCount = in.readString();
+        commentCount = in.readString();
+        myListCount = in.readString();
+        publishedDate = in.readString();
+        thumbnailPath = in.readString();
+    }
+
+    public static final Creator<NicoVideo> CREATOR = new Creator<NicoVideo>() {
+        @Override
+        public NicoVideo createFromParcel(Parcel in) {
+            return new NicoVideo(in);
+        }
+
+        @Override
+        public NicoVideo[] newArray(int size) {
+            return new NicoVideo[size];
+        }
+    };
 
     public String getUrl() {
         return url;
@@ -77,6 +101,14 @@ public class NicoVideo implements Parcelable {
 
     public void setThumbnailPath(String thumbnailPath) {
         this.thumbnailPath = thumbnailPath;
+    }
+
+    public String getHourTotalPoint() {
+        return hourTotalPoint;
+    }
+
+    public void setHourTotalPoint(String hourTotalPoint) {
+        this.hourTotalPoint = hourTotalPoint;
     }
 
     @Override

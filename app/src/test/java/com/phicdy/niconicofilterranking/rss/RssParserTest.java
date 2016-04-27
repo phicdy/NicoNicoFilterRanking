@@ -30,5 +30,6 @@ public class RssParserTest{
         assertThat(video.getCommentCount(), is(NicoChartFeed.FIRST_VIDEO.getCommentCount()));
         assertThat(video.getMyListCount(), is(NicoChartFeed.FIRST_VIDEO.getMyListCount()));
         assertThat(video.getThumbnailPath(), is(NicoChartFeed.FIRST_VIDEO.getThumbnailPath()));
+        assertThat(video.getHourTotalPoint(), is(NicoChartFeed.FIRST_VIDEO.getHourTotalPoint()));
     }
 }
