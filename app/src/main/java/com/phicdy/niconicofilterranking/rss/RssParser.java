@@ -31,7 +31,7 @@ public class RssParser {
             String commentCount = getCommentCount(content);
             String myListCount = getMyListCount(content);
             String thumbnailPath = getThumbnailPath(content);
-            String hourTotalPoint = getHourTotalPoint(content);
+            int hourTotalPoint = getHourTotalPoint(content);
             NicoVideo video = new NicoVideo(title, link, playCount, commentCount,
                     myListCount, publishedDateStr, thumbnailPath, hourTotalPoint);
             videos.add(video);
@@ -99,18 +99,19 @@ public class RssParser {
         return "";
     }
 
-    private String getHourTotalPoint(String content) {
+    private int getHourTotalPoint(String content) {
         if (content == null || content.equals("") || !content.startsWith("<p class")) {
-            return "";
+            return 0;
         }
         Document d = Jsoup.parse(content);
         if (d == null) {
-            return "";
+            return 0;
         }
         Elements elements = d.getElementsByClass("nico-info-number");
         if (elements != null && elements.size() == 1) {
-            return elements.get(0).text();
+            String pointStr = elements.get(0).text();
+            return Integer.valueOf(pointStr.replace(",", ""));
         }
-        return "";
+        return 0;
     }
 }

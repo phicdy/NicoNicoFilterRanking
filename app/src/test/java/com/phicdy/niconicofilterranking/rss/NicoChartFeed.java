@@ -13,7 +13,7 @@ public class NicoChartFeed {
             "963",
             "2016-04-27T14:16:15+09:00",
             "http://tn-skr1.smilevideo.jp/smile?i=28720768",
-            "19,826");
+            19826);
 
     public static final String FEED = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
             "<feed xmlns=\"http://www.w3.org/2005/Atom\" xml:lang=\"ja\">\n" +

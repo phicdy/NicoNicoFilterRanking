@@ -12,9 +12,12 @@ public class NicoVideo implements Parcelable {
     private String myListCount;
     private String publishedDate;
     private String thumbnailPath;
-    private String hourTotalPoint;
+    private int hourTotalPoint;
 
-    public NicoVideo(String title, String url, String playCount, String commentCount, String myListCount, String publishedDate, String thumbnailPath, String hourTotalPoint) {
+    public NicoVideo(String title, String url, String playCount,
+                     String commentCount, String myListCount,
+                     String publishedDate, String thumbnailPath,
+                     int hourTotalPoint) {
         this.title = title;
         this.url = url;
         this.playCount = playCount;
@@ -103,11 +106,11 @@ public class NicoVideo implements Parcelable {
         this.thumbnailPath = thumbnailPath;
     }
 
-    public String getHourTotalPoint() {
+    public int getHourTotalPoint() {
         return hourTotalPoint;
     }
 
-    public void setHourTotalPoint(String hourTotalPoint) {
+    public void setHourTotalPoint(int hourTotalPoint) {
         this.hourTotalPoint = hourTotalPoint;
     }
 
