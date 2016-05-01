@@ -129,4 +129,18 @@ public class NicoVideo implements Parcelable {
         dest.writeString(publishedDate);
         dest.writeString(thumbnailPath);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof NicoVideo)) return false;
+        NicoVideo video = (NicoVideo)o;
+        return getHourTotalPoint() == video.getHourTotalPoint() &&
+                getUrl().equals(video.getUrl()) &&
+                getCommentCount().equals(video.getCommentCount()) &&
+                getMyListCount().equals(video.getMyListCount()) &&
+                getPlayCount().equals(video.getPlayCount()) &&
+                getPublishedDate().equals(video.getPublishedDate()) &&
+                getThumbnailPath().equals(video.getThumbnailPath()) &&
+                getTitle().equals(video.getTitle());
+    }
 }
