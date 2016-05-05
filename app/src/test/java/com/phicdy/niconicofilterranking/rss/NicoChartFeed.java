@@ -159,7 +159,6 @@ public class NicoChartFeed {
             "      <p class=\"nico-info\"><small><strong class=\"nico-info-number\">7,193</strong>pts.｜<strong class=\"nico-info-length\">1:30</strong>｜<strong class=\"nico-info-date\">2016年04月27日 14:16:15</strong> 投稿<br/><strong>合計</strong>　再生：<strong class=\"nico-info-total-view\">205,290</strong>　コメント：<strong class=\"nico-info-total-res\">2,630</strong>　マイリスト：<strong class=\"nico-info-total-mylist\">3,188</strong><br/><strong>毎時</strong>　再生：<strong class=\"nico-info-hourly-view\">6,046</strong>　コメント：<strong class=\"nico-info-hourly-res\">53</strong>　マイリスト：<strong class=\"nico-info-hourly-mylist\">73</strong><br/></small></p>\n" +
             "    ]]></content>\n" +
             "  </entry>\n" +
-            "  <entry>" +
             "</feed>\n";
 
     public static String FEED3 = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
@@ -233,6 +232,5 @@ public class NicoChartFeed {
             "      <p class=\"nico-info\"><small><strong class=\"nico-info-number\">466</strong>pts.｜<strong class=\"nico-info-length\">0:57</strong>｜<strong class=\"nico-info-date\">2010年12月17日 21:15:19</strong> 投稿<br/><strong>合計</strong>　再生：<strong class=\"nico-info-total-view\">39,027</strong>　コメント：<strong class=\"nico-info-total-res\">273</strong>　マイリスト：<strong class=\"nico-info-total-mylist\">958</strong><br/><strong>毎時</strong>　再生：<strong class=\"nico-info-hourly-view\">391</strong>　コメント：<strong class=\"nico-info-hourly-res\">1</strong>　マイリスト：<strong class=\"nico-info-hourly-mylist\">5</strong><br/></small></p>\n" +
             "    ]]></content>\n" +
             "  </entry>\n" +
-            "  <entry>" +
             "</feed>\n";
 }
