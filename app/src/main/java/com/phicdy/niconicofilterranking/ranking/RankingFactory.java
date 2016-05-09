@@ -7,6 +7,7 @@ import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class RankingFactory {
     public static ArrayList<NicoVideo> generateRanking(Collection<Document> documents) {
@@ -16,6 +17,7 @@ public class RankingFactory {
             ArrayList<NicoVideo> videos = parser.parseNicoChartFeed(document);
             ranking.addAll(videos);
         }
+        Collections.sort(ranking, new NicoVideoComparator());
         return ranking;
     }
 }

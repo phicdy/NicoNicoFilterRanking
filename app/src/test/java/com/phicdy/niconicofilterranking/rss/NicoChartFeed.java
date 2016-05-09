@@ -14,6 +14,42 @@ public class NicoChartFeed {
             "2016-04-27T14:16:15+09:00",
             "http://tn-skr1.smilevideo.jp/smile?i=28720768",
             19826);
+    public static final NicoVideo SECOND_VIDEO = new NicoVideo(
+            "第1位：幕末志士達のダウンタウン熱血物語実況プレイ",
+            "http://www.nicovideo.jp/watch/sm28728573",
+            "15,666",
+            "786",
+            "435",
+            "",
+            "",
+            14268);
+    public static final NicoVideo THIRD_VIDEO = new NicoVideo(
+            "第2位：【ダークソウル３】ホストをひたすら落下させてみた part2【侵入動画】",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            10096);
+    public static final NicoVideo FOURTH_VIDEO = new NicoVideo(
+            "第2位：【実況】屋敷に秘められた真実も知らずに――『狂い月』【Part7】",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            9940);
+    public static final NicoVideo FIFTH_VIDEO = new NicoVideo(
+            "第3位：【ダークソウル３】　ホストをひたすら落下させてみた　【侵入動画】",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            9060);
 
     public static final String FEED = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
             "<feed xmlns=\"http://www.w3.org/2005/Atom\" xml:lang=\"ja\">\n" +
