@@ -184,8 +184,8 @@ public class NicoChartFeed {
             "    ]]></content>\n" +
             "  </entry>\n" +
             "  <entry>\n" +
-            "    <title>第5位：弱酸性ミリオンアーサー #24</title>\n" +
-            "    <link rel=\"alternate\" type=\"text/html\" href=\"http://www.nicovideo.jp/watch/so28720768\"/>\n" +
+            "    <title>第5位：aaaaaaa</title>\n" +
+            "    <link rel=\"alternate\" type=\"text/html\" href=\"http://www.nicovideo.jp/watch/so28720769\"/>\n" +
             "    <id>tag:nicovideo.jp,2016-04-27:/watch/so28720768</id>\n" +
             "    <published>2016-04-27T14:16:15+09:00</published>\n" +
             "    <updated>2016-04-28T20:00:00+09:00</updated>\n" +

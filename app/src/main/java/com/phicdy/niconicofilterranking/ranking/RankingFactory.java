@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 
 public class RankingFactory {
     public static ArrayList<NicoVideo> generateRanking(Collection<Document> documents) {
@@ -18,6 +19,17 @@ public class RankingFactory {
             ranking.addAll(videos);
         }
         Collections.sort(ranking, new NicoVideoComparator());
+        Iterator<NicoVideo> iterator = ranking.iterator();
+        String previousUrl = "";
+        int index = 0;
+        while (iterator.hasNext()) {
+            NicoVideo video = iterator.next();
+            if (video.getUrl().equals(previousUrl)) {
+                ranking.remove(index);
+            }
+            previousUrl = video.getUrl();
+            index = index + 1;
+        }
         return ranking;
     }
 }
