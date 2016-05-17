@@ -15,7 +15,7 @@ public class NicoChartFeed {
             "http://tn-skr1.smilevideo.jp/smile?i=28720768",
             19826);
     public static final NicoVideo SECOND_VIDEO = new NicoVideo(
-            "第1位：幕末志士達のダウンタウン熱血物語実況プレイ",
+            "第2位：幕末志士達のダウンタウン熱血物語実況プレイ",
             "http://www.nicovideo.jp/watch/sm28728573",
             "15,666",
             "786",
@@ -24,7 +24,7 @@ public class NicoChartFeed {
             "",
             14268);
     public static final NicoVideo THIRD_VIDEO = new NicoVideo(
-            "第2位：【ダークソウル３】ホストをひたすら落下させてみた part2【侵入動画】",
+            "第3位：【ダークソウル３】ホストをひたすら落下させてみた part2【侵入動画】",
             "",
             "",
             "",
@@ -33,7 +33,7 @@ public class NicoChartFeed {
             "",
             10096);
     public static final NicoVideo FOURTH_VIDEO = new NicoVideo(
-            "第2位：【実況】屋敷に秘められた真実も知らずに――『狂い月』【Part7】",
+            "第4位：【実況】屋敷に秘められた真実も知らずに――『狂い月』【Part7】",
             "",
             "",
             "",
@@ -42,7 +42,7 @@ public class NicoChartFeed {
             "",
             9940);
     public static final NicoVideo FIFTH_VIDEO = new NicoVideo(
-            "第3位：【ダークソウル３】　ホストをひたすら落下させてみた　【侵入動画】",
+            "第5位：【ダークソウル３】　ホストをひたすら落下させてみた　【侵入動画】",
             "",
             "",
             "",

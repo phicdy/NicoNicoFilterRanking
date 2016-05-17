@@ -25,7 +25,13 @@ public class RankingFactory {
         while (iterator.hasNext()) {
             NicoVideo video = iterator.next();
             if (video.getUrl().equals(previousUrl)) {
+                // Remove duplicate video
                 ranking.remove(index);
+            }else {
+                // Change ranking of title
+                String title = video.getTitle();
+                String rankChangedTitle = title.replaceAll("第[0-9]+位", "第" + (index+1) + "位");
+                video.setTitle(rankChangedTitle);
             }
             previousUrl = video.getUrl();
             index = index + 1;
