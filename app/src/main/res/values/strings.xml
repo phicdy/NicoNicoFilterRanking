@@ -4,4 +4,42 @@
     <string name="comment_count_desc">コメント：</string>
     <string name="mylist_count_desc">マイリスト：</string>
     <string name="network_error">接続に失敗しました。ネットワーク状態を確認してください</string>
+
+    <!-- Category -->
+    <string name="all">カテゴリ合算</string>
+    <string name="ent_music">エンタメ・音楽</string>
+    <string name="life">生活</string>
+    <string name="politics">政治</string>
+    <string name="science_tec">科学・技術</string>
+    <string name="anime_game">アニメ・ゲーム</string>
+    <string name="others">その他</string>
+    <string name="r18">R-18</string>
+    <string name="ent">エンタメ</string>
+    <string name="music">音楽</string>
+    <string name="sing">歌ってみた</string>
+    <string name="play">演奏してみた</string>
+    <string name="dance">踊ってみた</string>
+    <string name="vocaloid">VOCALOID</string>
+    <string name="nni">ニコニコインディーズ</string>
+    <string name="animal">動物</string>
+    <string name="cook">料理</string>
+    <string name="nature">自然</string>
+    <string name="travel">旅行</string>
+    <string name="sports">スポーツ</string>
+    <string name="lecture">ニコニコ動画講座</string>
+    <string name="drive">車載動画</string>
+    <string name="history">歴史</string>
+    <string name="science">科学</string>
+    <string name="technology">ニコニコ技術部</string>
+    <string name="handcraft">ニコニコ手芸部</string>
+    <string name="make">作ってみた</string>
+    <string name="anime">アニメ</string>
+    <string name="game">ゲーム</string>
+    <string name="toho">東方</string>
+    <string name="imas">アイドルマスター</string>
+    <string name="radio">ラジオ</string>
+    <string name="draw">描いてみた</string>
+    <string name="reinoare">例のアレ</string>
+    <string name="dialy">日記</string>
+    <string name="other">その他</string>
 </resources>

@@ -1,5 +1,9 @@
 package com.phicdy.niconicofilterranking.ranking;
 
+import android.content.Context;
+
+import com.phicdy.niconicofilterranking.R;
+
 public class Category {
     public static final int ALL = 0;
     public static final int ENT_MUSIC = 1;
@@ -50,5 +54,90 @@ public class Category {
             indexes[i] = i;
         }
         return indexes;
+    }
+
+    /**
+     *
+     * @param categoryId Category ID
+     * @param context
+     * @return Category title of ID. If ID does not exist, return empty title
+     */
+    public static String getCategory(int categoryId, Context context) {
+        switch (categoryId) {
+            case ALL:
+                return context.getString(R.string.all);
+            case ENT_MUSIC:
+                return context.getString(R.string.ent_music);
+            case LIFE:
+                return context.getString(R.string.life);
+            case POLITICS:
+                return context.getString(R.string.politics);
+            case SCIENCE_TEC:
+                return context.getString(R.string.science_tec);
+            case ANIME_GAME:
+                return context.getString(R.string.anime_game);
+            case OTHERS:
+                return context.getString(R.string.others);
+            case R18:
+                return context.getString(R.string.r18);
+            case ENT:
+                return context.getString(R.string.ent);
+            case MUSIC:
+                return context.getString(R.string.music);
+            case SING:
+                return context.getString(R.string.sing);
+            case PLAY:
+                return context.getString(R.string.play);
+            case DANCE:
+                return context.getString(R.string.dance);
+            case VOCALOID:
+                return context.getString(R.string.vocaloid);
+            case NNI:
+                return context.getString(R.string.nni);
+            case ANIMAL:
+                return context.getString(R.string.animal);
+            case COOK:
+                return context.getString(R.string.cook);
+            case NATURE:
+                return context.getString(R.string.nature);
+            case TRAVEL:
+                return context.getString(R.string.travel);
+            case SPORTS:
+                return context.getString(R.string.sports);
+            case LECTURE:
+                return context.getString(R.string.lecture);
+            case DRIVE:
+                return context.getString(R.string.drive);
+            case HISTORY:
+                return context.getString(R.string.history);
+            case SCIENCE:
+                return context.getString(R.string.science);
+            case TECHNOLOGY:
+                return context.getString(R.string.technology);
+            case HANDCRAFT:
+                return context.getString(R.string.handcraft);
+            case MAKE:
+                return context.getString(R.string.make);
+            case ANIME:
+                return context.getString(R.string.anime);
+            case GAME:
+                return context.getString(R.string.game);
+            case TOHO:
+                return context.getString(R.string.toho);
+            case IMAS:
+                return context.getString(R.string.imas);
+            case RADIO:
+                return context.getString(R.string.radio);
+            case DRAW:
+                return context.getString(R.string.draw);
+            case REINOARE:
+                return context.getString(R.string.reinoare);
+            case DIALY:
+                return context.getString(R.string.dialy);
+            case OTHER:
+                return context.getString(R.string.other);
+        }
+        return "";
+
     }
 }
