@@ -95,7 +95,7 @@ public class NicoVideoListFragment extends Fragment implements AbsListView.OnIte
         public void handleMessage(Message msg) {
             Bundle data = msg.getData();
             ArrayList<NicoVideo> videos = data.getParcelableArrayList(videoKey);
-            if (videos == null) {
+            if (videos == null || videos.size() == 0) {
                 videos = new ArrayList<>();
                 setEmptyText(getActivity().getString(R.string.network_error));
             }
